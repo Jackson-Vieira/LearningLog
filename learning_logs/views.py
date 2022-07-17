@@ -1,6 +1,7 @@
 
 
 
+from datetime import datetime
 from django.shortcuts import render
 
 from django.http import HttpResponseRedirect
@@ -8,7 +9,7 @@ from django.urls import is_valid_path, reverse
 
 import learning_logs
 
-from .models import Topic
+from .models import Entry, Topic
 from .forms import TopicForm, EntryForm
 
 # Create your views here.
@@ -64,3 +65,27 @@ def new_entry(request, topic_id):
     context = {'topic':topic,
                'form': form}
     return render(request,'learning_logs/new_entry.html', context)
+
+
+
+def edit_entry(request, entry_id):
+    entry = Entry.objects.get(id=entry_id)
+    topic = entry.topic
+
+    if request.method != 'POST':
+        form = EntryForm(instance=entry)
+        
+    else:
+        form = EntryForm(instance=entry, data=request.POST)
+        entry.date_added = datetime.now()
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('learning_logs:topic', args=[topic.id]))
+
+    context = {
+            'entry':entry,
+            'topic':topic,
+            'form': form
+               }
+
+    return render(request,'learning_logs/edit_entry.html', context)
