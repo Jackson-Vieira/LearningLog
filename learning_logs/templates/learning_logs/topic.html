@@ -4,15 +4,19 @@
     <h6>Topic:  {{topic}}</h6>
     
     <p>Entries: </p>
+    <p>
+        <a href="{% url 'learning_logs:new_entry' topic.id %}"> Add a new Entry: </a>
+    </p>
     <ul>
         {% for entry in entries %}
           <p>{{ entry.date_added|date:'M d, Y H:i' }}</p>
           <p>{{ entry.text|linebreaks }}</p>
+          <br>
         {% empty %}
             <li>
             There are no entries for this topic yet.
             </li>
         {% endfor %}
     </ul>
-
+    
 {% endblock content %}

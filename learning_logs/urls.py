@@ -12,4 +12,10 @@ urlpatterns = [
 
     #Details Topics
     path('topics/<topic_id>/', views.topic, name='topic'),
+
+    #Add a new Topic
+    path('new_topic/', views.new_topic, name='new_topic'),
+
+    #Add a new Entry
+    path('new_entry/<topic_id>/', views.new_entry, name='new_entry')
 ]
