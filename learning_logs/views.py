@@ -5,9 +5,7 @@ from datetime import datetime
 from django.shortcuts import render
 
 from django.http import HttpResponseRedirect
-from django.urls import is_valid_path, reverse
-
-import learning_logs
+from django.urls import  reverse
 
 from .models import Entry, Topic
 from .forms import TopicForm, EntryForm

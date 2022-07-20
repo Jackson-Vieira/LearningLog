@@ -1,9 +1,19 @@
-<p> 
-    <a href="{% url 'learning_logs:index' %}"> Learning Log </a>
-    
-</p>
-<p> 
-  <a href="{% url 'learning_logs:topics' %}"> Topics </a>
-</p>
+<a href="{% url 'learning_logs:index' %}"> Learning Log </a> - 
+<a href="{% url 'learning_logs:topics' %}"> Topics </a> - 
 
-{% block content %}{% endblock content%}
+{% if user.is_authenticated %}
+  <a href="{% url 'users:logout' %}">log out</a>  
+  <br>
+  <p>
+    Hello, {{user.username}}
+  </p>
+  
+{% else %}
+    <a href="{% url 'users:register' %}">register</a> - 
+    <a href="{% url 'users:login' %}">log in</a>
+{% endif %}
+
+
+{% block content %}
+
+{% endblock content%}
