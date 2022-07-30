@@ -1,4 +1,7 @@
+
+from django.conf import settings
 from django.urls import path
+from django.conf.urls.static import static
 from . import views
 
 app_name = 'learning_logs'
@@ -20,6 +23,6 @@ urlpatterns = [
     path('new_entry/<topic_id>/', views.new_entry, name='new_entry'),
 
     #Edit a existent Entry
-    path('edit_entry/<entry_id>/', views.edit_entry, name='edit_entry')
+    path('edit_entry/<entry_id>/', views.edit_entry, name='edit_entry'),
 
 ]
