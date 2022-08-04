@@ -42,13 +42,13 @@ def topic(request, topic_id):
 @login_required
 def new_topic(request):
     """Add a new Topic """
+    template_name = 'learning_logs/new_topic.html'
     if request.method != 'POST':
         form = TopicForm() # Create a form
     else:
         # POST
         form = TopicForm(request.POST)
         if form.is_valid():
-            
             new_topic = form.save(commit=False)
             new_topic.owner = request.user
             new_topic.save()

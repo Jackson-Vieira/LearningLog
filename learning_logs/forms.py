@@ -5,8 +5,8 @@ from .models import Entry, Topic
 class TopicForm(forms.ModelForm):
     class Meta:
         model = Topic # Model
-        fields = ['title', 'description', 'image'] # Campos do formulário
-        labels = {'title': 'Title', 'description':'Description', 'image':'image'} # Inicia o campo text vazio sem rótulo
+        fields = ['title', 'description'] # Campos do formulário
+        labels = {'title': 'Title', 'description':'Description'} # Inicia o campo text vazio sem rótulo
         widgets = {'description': forms.Textarea(attrs={'cols':80})}
 
 class EntryForm(forms.ModelForm):

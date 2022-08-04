@@ -1,3 +1,4 @@
+from distutils.command.upload import upload
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -8,11 +9,11 @@ class Topic(models.Model):
     date_added = models.DateTimeField(auto_now_add=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     description = models.TextField(max_length=200)
-    image = models.FileField(upload_to='static', null=True, blank=True)
+    image = models.ImageField(upload_to='',
+     blank=True, null=True)
 
     def __str__(self):
         return self.title
-
 
 class Entry(models.Model):
     """ Algo específico aprendido sobre um assunto.

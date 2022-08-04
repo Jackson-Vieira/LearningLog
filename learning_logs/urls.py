@@ -26,3 +26,9 @@ urlpatterns = [
     path('edit_entry/<entry_id>/', views.edit_entry, name='edit_entry'),
 
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(
+        settings.MEDIA_URL,
+        document_root=settings.MEDIA_ROOT,
+    )
