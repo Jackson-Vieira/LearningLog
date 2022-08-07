@@ -9,8 +9,7 @@ class Topic(models.Model):
     date_added = models.DateTimeField(auto_now_add=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     description = models.TextField(max_length=200)
-    image = models.ImageField(upload_to='',
-     blank=True, null=True)
+    image = models.ImageField(upload_to='')
 
     def __str__(self):
         return self.title
