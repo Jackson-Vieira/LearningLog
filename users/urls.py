@@ -10,6 +10,6 @@ urlpatterns = [
     # URL cadastro
     path('register/', views.register, name='register'),
     # URL login
-    path('login/', LoginView.as_view(template_name='users/login.html'), name='login'),
+    path('login/', views.login, name='login'),
     path('logout/', views.logout_view, name='logout')
     ]

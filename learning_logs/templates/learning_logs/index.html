@@ -1,23 +1,71 @@
 {% extends 'learning_logs/base.html' %}
+{% load static %}
 
 {% block header %}
-  <div class="jumbotron">
-    <h1 class="display-4">Learning Logs</h1>
-  </div>
+  <!-- Page Header-->
+  <header class="masthead" style="background-image: url('assets/img/home-bg.jpg')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>Learning logs</h1>
+                    <span class="subheading">
+                      Register an account to make your own Learning Log, and list the topics you're learning about.
+                    </span>
+                    <span>
+                  <a class="btn btn-primary btn-lg btn-dark my-2" href="{% url 'users:register'%}" role="button">Register</a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+  </header>
 {% endblock header%}
 
 {% block content %}
-  <p class="lead"> 
-    Whenever you learn something new about a topic, make an entry
-    summarizing what you've learned. </p>
-  <hr class="my-4">
-  <p>
-    Register an account to
-    make your own Learning Log, and list the topics you're learning about.
-  </p>
-  <p class="lead">
-    <a class="btn btn-primary btn-lg btn-dark" href="{% url 'users:register'%}" role="button">Register</a>
-  </p>
+<div class="container px-4 px-lg-5">
+  <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+
+          <!-- Post preview-->
+          <div class="post-preview">
+              <a href="post.html">
+                  <h2 class="post-title">Man must explore, and this is exploration at its greatest</h2>
+                  <h3 class="post-subtitle">Problems look mighty small from 150 miles up</h3>
+              </a>
+              <p class="post-meta">
+                  Posted by
+                  <a href="#!">Start Bootstrap</a>
+                  on September 24, 2022
+              </p>
+          </div>
+
+          
+          
+          <!-- Divider-->
+          <hr class="my-4" />
+          <!-- Post preview-->
+          <div class="post-preview">
+              <a href="post.html"><h2 class="post-title">I believe every human has a finite number of heartbeats. I don't intend to waste any of mine.</h2></a>
+              <p class="post-meta">
+                  Posted by
+                  <a href="#!">Start Bootstrap</a>
+                  on September 18, 2022
+              </p>
+          </div>
+
+          <!-- Divider-->
+          <hr class="my-4" />
+          <!-- Pager-->
+          <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Older Posts -> </a></div>
+
+      </div>
+  </div>
+</div>
+
+<!-- Core theme JS-->
+<script src="{% static 'js/scripts.js' %}"></script>
+  
 {% endblock content %}
 
 

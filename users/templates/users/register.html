@@ -1,11 +1,21 @@
-{% extends "learning_logs/base.html" %}
-
-{% block content %}
-
-    <form method="post" action="{% url 'users:register' %}">
+{% load django_bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+<div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <div class="mx-5">
+        <h2>Register a account</h2>
+    <form method="post" action="{% url 'users:login' %}" class="form">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button name="submit"> register </button>
+        {% bootstrap_form form %}
+
+        {% block buttons %}
+        <div class="text-center larger">
+            <button name="submit" class="btn btn-primary" style="width: 100%;">REGISTER</button>
+        </div>
+            
+        {% endblock buttons %}
+
+        <input type="hidden" name="next" value="{% url 'learning_logs:index' %}" />
     </form>
+</div>
     
-{% endblock content %}

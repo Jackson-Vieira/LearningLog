@@ -1,20 +1,23 @@
-{% extends 'learning_logs/base.html' %}
-
 {% load django_bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
 
-{% block header %}
-    <h2>Log in to your account.</h2>
-{% endblock header %}
-
-{% block content %}
+<div class="container d-flex justify-content-center align-items-center" style="height: 80vh;">
+    <div class="mx-5">
+        <h2>Log in to your account.</h2>
     <form method="post" action="{% url 'users:login' %}" class="form">
         {% csrf_token %}
         {% bootstrap_form form %}
 
         {% block buttons %}
-            <button name="submit" class="btn btn-primary">log in</button>
+        <div class="text-center larger">
+            <button name="submit" class="btn btn-primary" style="width: 100%;">LOGIN</button>
+        </div>
+            
         {% endblock buttons %}
 
         <input type="hidden" name="next" value="{% url 'learning_logs:index' %}" />
     </form>
-{% endblock content %}
+    Não tem conta? <a href="{% url 'users:register' %}" style="text-decoration: none">CADASTRE-SE.</a>
+</div>
+    
