@@ -1,7 +1,12 @@
+from cgitb import text
 from datetime import datetime
+from random import choice
+from turtle import title
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, Http404
+from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from django.urls import  reverse
 
 from .models import Entry, Topic
@@ -15,28 +20,57 @@ def check_topic_owner(request, topic):
 
 # Create your views here.
 def index(request):
-    return render(request, 'learning_logs/index.html')
+    """Home page"""
+    # get the five recent posts
+    # pagination
+    topics = Topic.objects.all().order_by('-date_added')
+    num_pages = 1
+    paginator = Paginator(topics, num_pages)
+    page = request.GET.get('page')
+    topics = paginator.get_page(page)
 
-@login_required
-def topics(request):
-    """Show all topics"""
-    topics = Topic.objects.filter(
-        owner=request.user
-    ).order_by('date_added')
-    context = {'topics': topics}
-    return render(request, 'learning_logs/topics.html', context)
+    return render(request, 'learning_logs/index.html', {'topics':topics})
 
 @login_required
 def topic(request, topic_id):
     """Show only topic and all yours informations"""
     topic = Topic.objects.get(id=topic_id)
-
     check_topic_owner(request, topic)
-    
+
     entries = topic.entry_set.order_by('-date_added')
     context = {'topic':topic,
                'entries': entries}
     return render(request, 'learning_logs/topic.html', context)
+
+@login_required
+def topics(request):
+    """Show all topics"""
+    random = bool(request.GET.get('random'))
+
+    # name --> simples
+    # category (tag) --> simples
+    search_query = request.GET.get('search_query')
+    topics = Topic.objects.all()
+
+    # FIltrar os tópicos que contem a query_string
+    # Filtras as entry que contem a query_string
+    if search_query != None:
+        topics  = Topic.objects.filter(
+            Q(entry__text__contains = search_query) | Q(title__contains = search_query),
+        )
+        
+    else:
+        topics  = topics.filter(
+            owner=request.user,
+        ).order_by('date_added')
+
+    if random:
+        choice_topic = choice(topics)
+        return topic(request, choice_topic.id)
+
+
+    context = {'topics': topics}
+    return render(request, 'learning_logs/topics.html', context)
 
 
 @login_required
@@ -85,6 +119,7 @@ def new_entry(request, topic_id):
 
 @login_required
 def edit_entry(request, entry_id):
+    """Edit a existent entry of a topic"""
 
     entry = Entry.objects.get(id=entry_id)
     topic = entry.topic

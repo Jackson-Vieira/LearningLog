@@ -1,4 +1,5 @@
 from distutils.command.upload import upload
+from turtle import title
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -19,6 +20,7 @@ class Entry(models.Model):
         Relacionamento (many-to-one relationship) """
 
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
+    heading = models.CharField('heading',blank=True, max_length=50)
     text = models.TextField(blank=False)
     date_added = models.DateTimeField(auto_now_add=True)
 
@@ -27,7 +29,5 @@ class Entry(models.Model):
         verbose_name_plural = 'entries'
 
     def __str__(self):
-        if len(self.text) <= 50:
-            return self.text
-        return self.text[:50] + "..."
+        return str(self.text)
 
