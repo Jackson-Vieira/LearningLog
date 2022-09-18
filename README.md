@@ -13,6 +13,7 @@ ___
 ![Home no logged](public/readme/home_no_logged.png)
 ![register](public/readme/register.png)
 ![login](public/readme/login.png)
+![post filter page](public/readme/home.png)
 ![post filter page](public/readme/post_filter.png)
 
 ### Built with
@@ -20,15 +21,17 @@ ___
 - BOOTSTRAP5
 - HTML5/CSS/JS
 
-### What I improved
+### What I learned
  - Models
  - URLs (make paths)
  - Requisition process
  - Views/GenericViews
  - QuerySet API Django
  - Forms
+ - Django Admin Interface
  - Database manipulation
  - Basic concepts of Authentication
+ - Pagination and Filters
 
 ```python
 class Topic(models.Model):
@@ -45,8 +48,10 @@ class Topic(models.Model):
 
 ### How do clone repository
 ```
-git clone https://github.com/hirokirigaya/githubfinder
-cd githubfinder
-npm install or yarn
-npm start / yarn run
+git clone https://github.com/Jackson-Vieira/LearningLog
+cd LearningLog
+pip install requirements.txt
+python3 manage.py migrate
+# python3 manage.py createsuperuser
+python3 manage.py runserver
 ```
