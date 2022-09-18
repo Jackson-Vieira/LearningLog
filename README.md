@@ -53,4 +53,8 @@ pip install requirements.txt
 python3 manage.py migrate
 # python3 manage.py createsuperuser
 python3 manage.py runserver
+<<<<<<< HEAD
 ```
+=======
+```
+>>>>>>> aa9edd6e8581911666b4ce55cbe5593ad85b469a
