@@ -1,4 +1,4 @@
-#!/home/hax/Documents/LearningLog/venv/bin/python3
+#!/home/hax/Documents/github-projects/learninglog/venv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys

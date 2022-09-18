@@ -1,1 +1,2 @@
-secrets_keys.py
+*.sqlite3 
+media

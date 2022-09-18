@@ -1,14 +1,21 @@
-{% extends "learning_logs/base.html" %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
 
-{% block content %}
-    <p> 
-        <a href=" {% url 'learning_logs:topic' topic.id %">{{topic}}</a>
-    </p>
+<div class="container">
 
-    <p>Edit entry:</p>
+    <header class="my-5">
+        <h2>Topic: <a style="text-decoration: none;" href="{% url 'learning_logs:topic' topic.id %}">{{topic}}</a></h2>
+    </header>
+  <div style="width: 500px;">
+    <h4>Edit entry:</h4>
     <form action="{% url 'learning_logs:edit_entry' entry.id %}" method="post"> 
-        {% csrf_token%}
-        {{form.as_p}}
-        <button name="submit"> save changes </button>
+      {% csrf_token %}
+      {% bootstrap_form form %}
+  
+      {% block buttons %}
+          <button name="submit" class="btn btn-primary bg-dark">submit</button>
+      {% endblock buttons %}
     </form>
-{% endblock content %}
+  </div>      
+</div>

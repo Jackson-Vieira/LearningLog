@@ -3,18 +3,21 @@
 
 {% block header %}
   <!-- Page Header-->
-  <header class="masthead" style="background-image: url('assets/img/home-bg.jpg')">
+  <header class="masthead" style="background: linear-gradient(109.6deg, rgb(36, 45, 57) 11.2%, rgb(16, 37, 60) 51.2%, rgb(0, 0, 0) 98.6%);">
     <div class="container position-relative px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <div class="site-heading">
                     <h1>Learning logs</h1>
+                    {% if not user.is_authenticated %}
                     <span class="subheading">
                       Register an account to make your own Learning Log, and list the topics you're learning about.
                     </span>
+                    
                     <span>
-                  <a class="btn btn-primary btn-lg btn-dark my-2" href="{% url 'users:register'%}" role="button">Register</a>
+                  <a class="btn btn-primary btn-lg btn-light my-2" href="{% url 'users:register'%}" role="button">Register</a>
                     </span>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -33,7 +36,7 @@
           <hr class="my-4" />
           <!-- Post preview-->
           <div class="post-preview">
-              <a href="post.html"><h2 class="post-title">{{topic.title}}</h2></a>
+              <a href="{% url 'learning_logs:topic' topic.id %}"><h2 class="post-title">{{topic.title}}</h2></a>
               <p class="post-meta">
                   Posted by
                   <a href="#!">{{topic.owner}}</a>
@@ -42,22 +45,25 @@
           </div>
 
           {% endfor %}
-          <!-- Divider-->
+
+        {% if topics %}
+            <!-- Divider-->
           <hr class="my-4" />
-          <!-- Pager-->
-          <div class="d-flex justify-content-end mb-4 ">
-            {% if topics.has_previous %}
-            <a class= "mx-1" href="?page={{ topics.previous_page_number }}">Anterior</a>
+            <!-- Pager-->
+            <div class="d-flex justify-content-end mb-4 ">
+          {% if topics.has_previous %}
+              <a class= "mx-1" href="?page={{ topics.previous_page_number }}">Anterior</a>
+          {% endif %}
+            
+          <span class="current">
+              {{ topics.number }} de {{ topics.paginator.num_pages }}
+          </span>
+      
+          {% if topics.has_next %}
+              <a class= "mx-1" href="?page={{ topics.next_page_number }}">Próxima</a>
+          {% endif %}
+            </div>  
         {% endif %}
-    
-        <span class="current">
-            {{ topics.number }} de {{ topics.paginator.num_pages }}
-        </span>
-    
-        {% if topics.has_next %}
-            <a class= "mx-1" href="?page={{ topics.next_page_number }}">Próxima</a>
-        {% endif %}
-          </div>
           
           
 
@@ -69,6 +75,3 @@
 <script src="{% static 'js/scripts.js' %}"></script>
   
 {% endblock content %}
-
-
-

@@ -5,7 +5,7 @@
 {% block header %}
 
 <!-- Page Header-->
-<header class="masthead" style="background-image: url('assets/img/post-bg.jpg')">
+<header class="masthead"  style="background: linear-gradient(109.6deg, rgb(36, 45, 57) 11.2%, rgb(16, 37, 60) 51.2%, rgb(0, 0, 0) 98.6%);">
   <div class="container position-relative px-4 px-lg-5">
       <div class="row gx-4 gx-lg-5 justify-content-center">
           <div class="col-md-10 col-lg-8 col-xl-7">
@@ -26,15 +26,26 @@
 
 {% block content %}
   <!-- Post Content-->
-  <article class="mb-4">
-    {% for entrie in entries %}
-    <div class="container px-4 px-lg-5">
+    
+
+  <article class="container mb-4">
+    
+    <div>
+        <a href="{% url 'learning_logs:new_entry' topic.id %}">
+            <button class="btn btn-dark">Add a Entry</button>
+        </a>
+    </div>
+    <hr>
+    {% for entry in entries %}
+    <div class="px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
-                {% if entrie.heading %}
-                <h2>{{entrie.heading}}</h2>
+                {% if entry.header %}
+                <h2>{{entry.header}}</h2>
                 {% endif %}
-                <p>{{entrie}}</p>
+                {% if entry.text %}
+                    <p>{{entry.text}} <a style="color:blue;" href="{% url 'learning_logs:edit_entry' entry.id %}">edit</a> </p> 
+                {% endif %}
                 <!-- <p>Never in all their history have men been able truly to conceive of the world as one: a single sphere, a globe, having the qualities of a globe, a round earth in which all the directions eventually meet, in which there is no center because every point, or none, is center — an equal earth which all men occupy as equals. The airman's earth, if free men make it, will be truly round: a globe in practice, not in theory.</p>
                 <p>Science cuts two ways, of course; its products can be used for both good and evil. But there's no turning back from science. The early warnings about technological dangers also come from science.</p> -->
   

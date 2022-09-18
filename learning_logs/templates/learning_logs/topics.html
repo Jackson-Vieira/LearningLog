@@ -1,7 +1,4 @@
 {% extends 'learning_logs/base.html' %}
-{% load django_bootstrap5 %}
-{% bootstrap_css %}
-{% bootstrap_javascript %}
 
 {% load static %}
 
@@ -46,15 +43,17 @@
   <div class="row gx-4 gx-lg-5 justify-content-center">
       <div class="col-md-10 col-lg-8 col-xl-7">
         
+        
           <form class="input-group rounded" type="post">
             <input type="search" id="text" name="search_query"class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
             <button type="submit" class="input-group-text border-0" id="search-addon">
               <i class="fas fa-search"></i>
             </button>
           </form>
+          <a href="{% url 'learning_logs:new_topic' %}">
+            <button class="btn btn-dark my-5"> Add a post </button> 
+          </a>
           
-      
-
         {% for topic in topics %}
           <!-- Divider-->
           <hr class="my-4" />

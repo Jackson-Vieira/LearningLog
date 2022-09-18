@@ -1,18 +1,21 @@
-{% extends 'learning_logs/base.html'  %}
-
 {% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
 
-{% block header %}
-    <h2>Add a new Topic:</h2>
-{% endblock header %}
-
-{% block content%}
-    <form action="{% url 'learning_logs:new_topic' %}" method="post" class="form" enctype="multipart/form-data">
-        {% csrf_token %}
-        {% bootstrap_form form %}
+<div class="container">
+    <header class="my-5">
+        <h2>Add a new Topic:</h2>
+    </header>
         
-        {% block buttons %}
-            <button name="submit" class="btn btn-primary bg-dark">add topic</button>
-        {% endblock buttons %}
-    </form>
-{% endblock content %}
+    <div style="width: 500px;">
+        <form action="{% url 'learning_logs:new_topic' %}" method="post"  enctype="multipart/form-data">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+        
+            {% block buttons %}
+                <button name="submit" class="btn btn-primary bg-dark">submit</button>
+            {% endblock buttons %}
+        </form>
+    </div>
+        
+</div>

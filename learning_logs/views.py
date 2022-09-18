@@ -1,7 +1,5 @@
-from cgitb import text
 from datetime import datetime
 from random import choice
-from turtle import title
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, Http404
 from django.core.paginator import Paginator
@@ -12,22 +10,26 @@ from django.urls import  reverse
 from .models import Entry, Topic
 from .forms import TopicForm, EntryForm
 
-# My functions
+# Useful functions
 def check_topic_owner(request, topic):
     if topic.owner != request.user:
         raise Http404
 
 
-# Create your views here.
 def index(request):
     """Home page"""
-    # get the five recent posts
-    # pagination
-    topics = Topic.objects.all().order_by('-date_added')
-    num_pages = 1
-    paginator = Paginator(topics, num_pages)
-    page = request.GET.get('page')
-    topics = paginator.get_page(page)
+
+    user = request.user
+    topics = []
+
+    if user.is_anonymous == False:
+        topics = Topic.objects.filter(
+        owner=request.user,
+        ).order_by('-date_added')
+        num_pages = 1
+        paginator = Paginator(topics, num_pages)
+        page = request.GET.get('page')
+        topics = paginator.get_page(page)
 
     return render(request, 'learning_logs/index.html', {'topics':topics})
 
@@ -44,20 +46,15 @@ def topic(request, topic_id):
 
 @login_required
 def topics(request):
-    """Show all topics"""
     random = bool(request.GET.get('random'))
-
-    # name --> simples
-    # category (tag) --> simples
     search_query = request.GET.get('search_query')
+
     topics = Topic.objects.all()
 
-    # FIltrar os tópicos que contem a query_string
-    # Filtras as entry que contem a query_string
     if search_query != None:
         topics  = Topic.objects.filter(
             Q(entry__text__contains = search_query) | Q(title__contains = search_query),
-        )
+        )#.distinct('entry') is not supported by SQLite3
         
     else:
         topics  = topics.filter(
@@ -67,7 +64,6 @@ def topics(request):
     if random:
         choice_topic = choice(topics)
         return topic(request, choice_topic.id)
-
 
     context = {'topics': topics}
     return render(request, 'learning_logs/topics.html', context)
@@ -86,6 +82,7 @@ def new_topic(request):
             new_topic = form.save(commit=False)
             new_topic.owner = request.user
             new_topic.save()
+            form.save()
 
             return HttpResponseRedirect(reverse('learning_logs:topics'))
 
