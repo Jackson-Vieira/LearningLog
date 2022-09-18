@@ -5,7 +5,7 @@ First Project using Django, the application is a private Personal Blog.
 ## Contents
 - [Screenshots](#screenshots)
 - [Built with](#built-with)
-- [What I improved](#what-i-improved)
+- [What I Learned](#what-i-learned)
 - [How do clone repository](#how-do-clone-repository)
 ___
 ### Screenshots
@@ -53,8 +53,4 @@ pip install requirements.txt
 python3 manage.py migrate
 # python3 manage.py createsuperuser
 python3 manage.py runserver
-<<<<<<< HEAD
 ```
-=======
-```
->>>>>>> aa9edd6e8581911666b4ce55cbe5593ad85b469a
