@@ -33,6 +33,14 @@ ___
  - Basic concepts of Authentication
  - Pagination and Filters
 
+
+### Improvements
+- [ ] Model Notes
+- [ ] Learn and practice about managers.py
+- [ ] Tests and rewrite bad codes
+- [ ] Authentication System (Groups and Permissions --> [GOLD OR BASIC PLANS])
+- [ ] Add Javascript (Rich-Text Formatting Editor)
+
 ```python
 class Topic(models.Model):
     """Um assunto sobre o qual o usuário está aprendendo."""
